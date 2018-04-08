@@ -1,7 +1,6 @@
 // Select color input
 // Select size input
 var grid = {};
-
 // When size is submitted by the user, call makeGrid()
 
 function makeGrid(gridObj) {
@@ -11,21 +10,26 @@ function makeGrid(gridObj) {
 
     for (var i = 0; i < rows; i++) {
 
-       var $row = $("<tr>").addClass(function (i) {
-            return "row " + "row-" + i;
-        });
+       var $row = $("<tr>", {class: "row " + "row-" + i});
         $("#pixelCanvas").append($row);
 
         for (var j = 0; j < columns; j++) {
 
-            var $col =  $("<td>").addClass(function (j) {
-                return "cell " + "cell" + j;
-            });
+            var $col =  $("<td>", {class: "cell " + "cell-" + j});
+
             ($row).append($col);
         }
     };
 
 }
+
+function colorize() {
+
+    $(document.body).on("click", ".cell" ,function (e){
+        $(e.target).css("background-color", $("#colorPicker").val());
+    });
+
+ }
 
 /**
  * Function uses form input values to store the size of the pixel grid.
@@ -42,7 +46,6 @@ function changeGridSize(gridObj, criteria) {
 };
 
 function clearGrid(){
-    debugger;
     if ($(".row").length >= 1) {
         $(".row").remove();
     }
@@ -58,5 +61,6 @@ $("#sizePicker").submit(grid, function (e) {
     clearGrid();
     changeGridSize(grid, this.elements);
     makeGrid(grid);
+    colorize();
 
 });
