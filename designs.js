@@ -1,21 +1,30 @@
-// Select color input
-// Select size input
-var grid = {};
-// When size is submitted by the user, call makeGrid()
+//object containing the grid's height and width
+const grid = {};
 
+
+/**
+ * Builds the pixel art grid in the DOM
+ * @param{object} grid size properties.
+ */
+// When size is submitted by the user, call makeGrid()
 function makeGrid(gridObj) {
 
-    var rows = gridObj.height;
-    var columns = gridObj.width;
+    // Select size input
+    let rows = gridObj.height;
+    let columns = gridObj.width;
 
-    for (var i = 0; i < rows; i++) {
+    for (let i = 0; i < rows; i++) {
 
-       var $row = $("<tr>", {class: "row " + "row-" + i});
+        let $row = $("<tr>", {
+            class: "row " + "row-" + i
+        });
         $("#pixelCanvas").append($row);
 
-        for (var j = 0; j < columns; j++) {
+        for (let j = 0; j < columns; j++) {
 
-            var $col =  $("<td>", {class: "cell " + "cell-" + j});
+            let $col = $("<td>", {
+                class: "cell " + "cell-" + j
+            });
 
             ($row).append($col);
         }
@@ -23,13 +32,19 @@ function makeGrid(gridObj) {
 
 }
 
+/**
+ * Function adds a click event to grid cells and assigns the
+ * background color
+ * 
+ */
 function colorize() {
-
-    $(document.body).on("click", ".cell" ,function (e){
+    
+    $(document.body).on("click", ".cell", function (e) {
+        // Select color input
         $(e.target).css("background-color", $("#colorPicker").val());
     });
 
- }
+}
 
 /**
  * Function uses form input values to store the size of the pixel grid.
@@ -38,27 +53,54 @@ function colorize() {
  * @param{object: any} HTMLFormControlsCollection
  * 
  */
-
 function changeGridSize(gridObj, criteria) {
     gridObj.height = criteria["inputHeight"].value;
     gridObj.width = criteria["inputWeight"].value;
 
 };
 
-function clearGrid(){
-    if ($(".row").length >= 1) {
-        $(".row").remove();
+/**
+ * Function clears the grid
+ */
+function clearGrid() {
+    let i = 0;
+    let $cells = $(".cell");
+
+    if ($cells.length > 0) {
+
+        $cells.each(function (e, elm) {
+            $(elm).removeAttr("background");
+        });
     }
 }
 
 /**
- * Event listener that resizes the pixel grid on submisson of the form that has
- * size values. Submit will not reload the page.
+ * Function deletes the grid.
+ */
+function deleteGrid() {
+
+    let rows = document.getElementsByClassName("row");
+    let i = rows.length;
+
+    if (i > 0) {
+        while (i > 0) {
+
+            rows[i - 1].remove();
+            i = rows.length;
+        }
+
+    }
+}
+
+/**
+ * Submit event listener that calls several helper functions and events.
+ * Submit will not reload the page.
  */
 
 $("#sizePicker").submit(grid, function (e) {
     e.preventDefault();
     clearGrid();
+    deleteGrid();
     changeGridSize(grid, this.elements);
     makeGrid(grid);
     colorize();
