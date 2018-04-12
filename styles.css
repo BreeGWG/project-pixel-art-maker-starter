@@ -1,5 +1,6 @@
 body {
     text-align: center;
+    background: linear-gradient(90deg, lightpink, lightblue)
 }
 
 h1 {
@@ -25,6 +26,11 @@ td {
 table {
     border-collapse: collapse;
     margin: 0 auto;
+    
+}
+
+#pixelCanvas tr {
+    display: table-row;
 }
 
 tr,
@@ -34,6 +40,78 @@ td {
     border: 1px solid rgb(128, 128, 128);
 }
 
+.form-wrapper {
+    text-align:center;
+    margin-bottom: 30px;
+}
+
+.form-wrapper form{
+    width: 50%;
+    display: inline-block;
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 2px 2px 12px rgba(000,000,000,0.5);
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
 input[type=number] {
     width: 6em;
+}
+form .form-inline {
+    width: 33%;
+    text-align: left;
+}
+form .form-inline,
+form .form-entry {
+    display: inline-block;
+}
+form .form-entry {
+    min-height: 54px;
+}
+
+form .form-header {
+    margin-top: 20px;
+    height: 45px;
+}
+
+form input {
+
+}
+
+form .color-picker {
+    padding: 0;     
+    background: none;
+    border: none;
+    border-radius: .25rem;
+    height: 30px !important;
+    width: 42px !important;
+}
+
+/*responsive*/
+@media only screen and (max-width: 720px) {
+    form#sizePicker {
+        height: 325px;
+    }
+    
+    form .form-inline,
+    form .form-entry {
+        display: block;
+    }
+     
+    form .form-inline {
+        width: 100%;
+        text-align: center;
+    }
+    
+    form .form-entry.color,
+    form .form-entry.width,
+    form .form-entry.height {
+        display: inline-block;
+    }
+
+    form .enter-btn {
+        margin-top: 30%;
+    }
+    
+     
 }

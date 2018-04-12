@@ -2,29 +2,41 @@
 <html>
 <head>
     <title>Pixel Art Maker!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton">
     <link rel="stylesheet" href="styles.css">
-    
-
 </head>
 <body>
     <h1>Lab: Pixel Art Maker</h1>
-
-    <h2>Choose Grid Size</h2>
-    <form id="sizePicker">
-        Grid Height:
-        <input type="number" id="inputHeight" name="height" min="1" value="5" max="50">
-        Grid Width:
-        <input type="number" id="inputWeight" name="width" min="1" value="5" max="50">
-        <input type="submit">
-    </form>
-
-    <h2>Pick A Color</h2>
-    <input type="color" id="colorPicker">
-
-    <h2>Design Canvas</h2>
+    <div class="form-wrapper"> 
+        <form id="sizePicker">
+            <div class="form-inline"> 
+                <div class="form-header color">
+                    <h3>Pick A Color</h3>
+                </div>
+                <div class="form-entry color">
+                    <label name="color">Color</label>
+                    <button class="btn btn-default"><input class="color-picker form-control" type="color" name="color" id="colorPicker"></button>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="form-header size">
+                    <h3>Choose Grid Size</h3>
+                    <div class="form-entry width">
+                        <label name="height">Width</label>
+                        <input  class="form-control" id=width type="number" id="inputWeight" name="width" min="1" value="10" max="100">
+                    </div>    
+                    <div class="form-entry height">
+                        <label name="height">Height</label>
+                        <input  class="form-control" id="height" type="number" id="inputHeight" name="height" min="1" value="10" max="100">
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-default enter-btn" type="submit">Submit</button>
+        </form>
+    </div> 
+    <h3>Design Canvas</h3>
     <table id="pixelCanvas"></table>
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="designs.js"></script>
 </body>

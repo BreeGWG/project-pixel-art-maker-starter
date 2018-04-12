@@ -8,10 +8,11 @@ const grid = {};
  */
 // When size is submitted by the user, call makeGrid()
 function makeGrid(gridObj) {
-
+    
     // Select size input
-    let rows = gridObj.height;
-    let columns = gridObj.width;
+
+    let rows = gridObj.canvasHeight;
+    let columns = gridObj.canvasWidth; 
 
     for (let i = 0; i < rows; i++) {
 
@@ -38,7 +39,7 @@ function makeGrid(gridObj) {
  * 
  */
 function colorize() {
-    
+    $("#pixelCanvas").css("background-color", "white");
     $(document.body).on("click", ".cell", function (e) {
         // Select color input
         $(e.target).css("background-color", $("#colorPicker").val());
@@ -53,9 +54,10 @@ function colorize() {
  * @param{object: any} HTMLFormControlsCollection
  * 
  */
-function changeGridSize(gridObj, criteria) {
-    gridObj.height = criteria["inputHeight"].value;
-    gridObj.width = criteria["inputWeight"].value;
+function getGridSize(gridObj, criteria) {
+
+            gridObj.canvasHeight = criteria ? criteria.height.value : $("#height").val();
+            gridObj.canvasWidth = criteria ? criteria.width.value : $("#width").val();
 
 };
 
@@ -91,18 +93,28 @@ function deleteGrid() {
 
     }
 }
+function gridCustomizer() {
 
+    $("#sizePicker").submit(grid, function (e) {
+        e.preventDefault();
+        clearGrid();
+        deleteGrid(); 
+        getGridSize(grid, this.elements);
+        makeGrid(grid);
+        colorize();
+
+    });
+}
 /**
  * Submit event listener that calls several helper functions and events.
  * Submit will not reload the page.
  */
 
-$("#sizePicker").submit(grid, function (e) {
-    e.preventDefault();
-    clearGrid();
-    deleteGrid();
-    changeGridSize(grid, this.elements);
+$(document).ready(function () {
+    
+    getGridSize(grid, this.elements);
     makeGrid(grid);
     colorize();
+    gridCustomizer();
 
 });
