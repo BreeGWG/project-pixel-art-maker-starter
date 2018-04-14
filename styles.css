@@ -8,7 +8,7 @@ body {
     min-width: 100%;
     min-height: 100%;
     background: linear-gradient(45deg, rgba(254, 183, 194, 0.5), rgba(173, 216, 230,0.5));
-    background-size: contain;
+    background-size: 100%;
 }
 
 form#sizePicker {
@@ -94,9 +94,6 @@ form .form-inline,
 form .form-entry {
     display: inline-block;
 }
-form .form-entry {
-    min-height: 54px;
-}
 
 form .form-header {
     margin-top: 20px;
@@ -104,13 +101,18 @@ form .form-header {
 }
 
 form .color-picker {
-    padding: 0;     
+    padding: 0 !important;     
     background: none;
     border: none;
     border-radius: .25rem;
     height: 20px !important;
     width: 42px !important; 
     max-height: 38px;                   
+}
+
+form .set-1,
+form .set-2{
+    display: inline-block;
 }
  
 button.color {
@@ -120,7 +122,8 @@ button.color {
 /*responsive*/
 @media only screen and (max-width: 720px) {
     form#sizePicker {
-        height: 350px;
+        display: inline-block;
+        width: 100%;
     }
     
     form .form-inline,
@@ -138,10 +141,16 @@ button.color {
     form .form-entry.height {
         display: inline-block;
     }
-
-    form .enter-btn {
-        margin-top: 30%;
-    }
     
-     
+    form .set-1,
+    form .set-2{
+        display: block;
+    }   
+    
+    form .set-2 {
+        padding-top: 10px;
+    }
+    button.color {
+        display: block;
+    }
 }

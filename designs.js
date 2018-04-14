@@ -34,16 +34,34 @@ function makeGrid(gridObj) {
 }
 
 /**
- * Function adds a click event to grid cells and assigns the
+ * Function adds a click and mouseevents to the parent element and assigns the
  * background color
  * 
  */
 function colorize() {
+
     $("#pixelCanvas").css("background-color", "white");
-    $(document.body).on("click", ".cell", function (e) {
-        // Select color input
-        $(e.target).css("background-color", $("#colorPicker").val());
-    });
+    let color = "";
+    let colorState = "";
+    $(document.body).on( {
+
+        mousedown : function (e) {
+            color = $("#colorPicker").val();
+            colorState = "active";
+        },
+        mouseup : function (e) {
+             colorState = "";
+        },
+        mousemove : function (e) {
+            if (colorState === "active") {
+            e.target.style.backgroundColor = color;
+            }
+        },
+        click : function (e) {
+            e.target.style.backgroundColor = color;
+        } 
+
+    }, ".cell");
 
 }
 
@@ -71,9 +89,21 @@ function clearGrid() {
     if ($cells.length > 0) {
 
         $cells.each(function (e, elm) {
-            $(elm).removeAttr("background");
+            $(elm).css("background-color", "#ffffff");
         });
     }
+
+}
+
+function confirmReset() {
+    
+    $("button.clear-btn").click(function (){
+        
+        if (confirm("Do you really want to clear the grid?")) {
+            clearGrid();
+        }
+        
+    });
 }
 
 /**
@@ -116,5 +146,7 @@ $(document).ready(function () {
     makeGrid(grid);
     colorize();
     gridCustomizer();
+    confirmReset();
+
 
 });
