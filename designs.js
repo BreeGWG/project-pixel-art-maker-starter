@@ -96,7 +96,7 @@ function clearGrid() {
 }
 
 function confirmReset() {
-    
+
     $("button.clear-btn").click(function (){
         
         if (confirm("Do you really want to clear the grid?")) {
@@ -123,6 +123,21 @@ function deleteGrid() {
 
     }
 }
+
+/**
+ * Function toggles grid borders on and off.
+ */
+function toggleGrid () {
+    
+    $("button.toggle-btn").click(function (){
+     
+        $("tr.row").toggleClass("borderless");
+         $("td.cell").toggleClass("borderless");   
+     
+    });    
+}
+
+
 function gridCustomizer() {
 
     $("#sizePicker").submit(grid, function (e) {
@@ -147,6 +162,7 @@ $(document).ready(function () {
     colorize();
     gridCustomizer();
     confirmReset();
+    toggleGrid();
 
 
 });
