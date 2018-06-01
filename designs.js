@@ -73,6 +73,8 @@ function colorize() {
  * 
  */
 function getGridSize(gridObj, criteria) {
+    //TODO create a dispatcher to determine if adding grid cells or
+    // deleting grid cells based on h&w entries.
     var $heightEntryVal = $("#height").val();
     var $widthEntryVal = $("#width").val();
     if ( gridObj.canvasHeight - $heightEntryVal !== 0 ||
