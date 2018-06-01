@@ -1,6 +1,6 @@
 //object containing the grid's height and width
 const grid = {};
-
+var status = 1;
 
 /**
  * Builds the pixel art grid in the DOM
@@ -73,10 +73,19 @@ function colorize() {
  * 
  */
 function getGridSize(gridObj, criteria) {
-
-            gridObj.canvasHeight = criteria ? criteria.height.value : $("#height").val();
-            gridObj.canvasWidth = criteria ? criteria.width.value : $("#width").val();
-
+    var $heightEntryVal = $("#height").val();
+    var $widthEntryVal = $("#width").val();
+    if ( gridObj.canvasHeight - $heightEntryVal !== 0 ||
+         gridObj.canvasWidth - $widthEntryVal !== 0 
+       ) {
+     status = 1; 
+     gridObj.canvasHeight = criteria ? criteria.height.value : $("#height").val();
+     gridObj.canvasWidth = criteria ? criteria.width.value : $("#width").val();
+      
+    }
+    else {
+      status = 0;
+    }
 };
 
 /**
@@ -137,16 +146,24 @@ function toggleGrid () {
     });    
 }
 
-
 function gridCustomizer() {
 
     $("#sizePicker").submit(grid, function (e) {
         e.preventDefault();
-        clearGrid();
-        deleteGrid(); 
+        //clearGrid();
         getGridSize(grid, this.elements);
-        makeGrid(grid);
-        colorize();
+        
+      if (Number(status)) {
+           deleteGrid(); 
+           makeGrid(grid);
+           colorize();
+          
+        }
+       else {
+         alert("Want to resize? Change the width or height.");
+       }
+       
+      
 
     });
 }
